@@ -1,0 +1,89 @@
+﻿<div class=content>
+  <div class=article-content>
+    {%- if is_category or is_tag %}
+      <h1 class=index-title>{{ page_title }}</h1>
+      {%- if subtitle %}<h4 class=text-muted>{{ subtitle }}</h4>{% endif -%}
+    {% endif %}
+    {%- assign post_count = model.posts | size -%}
+    {%- if post_count > 0 %}
+      <section class="container mt-3" aria-label="The posts for the page">
+        {%- for post in model.posts %}
+          <article>
+            <h1>
+              <a href="{{ post | relative_link }}" title="Permanent link to &quot;{{ post.title | escape }}&quot;">
+                {{ post.title }}
+              </a>
+            </h1>
+            <p>
+            Published on {{ post.published_on | date: "MMMM d, yyyy" }}
+            at {{ post.published_on | date: "h:mmtt" | downcase }}
+            by {{ model.authors | value: post.author_id }}
+            {{ post.text }}
+            {%- assign category_count = post.category_ids | size -%}
+            {%- assign tag_count = post.tags | size -%}
+            {% if category_count > 0 or tag_count > 0 %}
+              <footer>
+                <p>
+                {%- if category_count > 0 -%}
+                  Categorized under:
+                  {% for cat in post.category_ids -%}
+                    {%- assign this_cat = categories | where: "Id", cat | first -%}
+                    {{ this_cat.name }}{% unless forloop.last %}, {% endunless %}
+                    {%- assign cat_names = this_cat.name | concat: cat_names -%}
+                  {%- endfor -%}
+                  {%- assign cat_names = "" -%}
+                  <br>
+                {% endif -%}
+                {%- if tag_count > 0 %}
+                  Tagged: {{ post.tags | join: ", " }}
+                {% endif -%}
+              </footer>
+            {% endif %}
+            <hr>
+          </article>
+        {% endfor %}
+      </section>
+      <nav aria-label=pagination>
+        <ul class="pagination justify-content-evenly mt-2">
+        {% if model.newer_link -%}
+          <li class=page-item><a class=page-link href="{{ model.newer_link.value }}">&laquo; Newer Posts</a>
+        {% endif %}
+        {% if model.older_link -%}
+          <li class=page-item><a class=page-link href="{{ model.older_link.value }}">Older Posts &raquo;</a>
+        {%- endif -%}
+        </ul>
+      </nav>
+    {%- else %}
+      <article><p class="text-center mt-3">No posts found</article>
+    {%- endif %}
+    <div class="sidebar mobile d-flex d-md-none d-lg-none d-xl-none">
+      <div class="item categories mobile ">
+        <h5 class=item-heading>Categories</h4>
+        <ul class=cat-list>
+        {%- for cat in categories -%}
+          {%- assign indent = cat.parent_names | size %}
+          <li class=cat-list-item{% if indent > 0 %} style="padding-left:{{ indent }}rem;"{% endif %}>
+          <a href="{{ cat | category_link }}" class=cat-list-link>{{ cat.name }}</a>
+          <span class=cat-list-count>{{ cat.post_count }}</span>
+        {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar d-none d-md-flex d-lg-flex d-xl-flex">
+    <br>
+    <div class="item categories">
+      <h5 class=item-heading>Categories</h4>
+      <ul class=cat-list>
+      {%- for cat in categories -%}
+        {%- assign indent = cat.parent_names | size %}
+        <li class=cat-list-item{% if indent > 0 %} style="padding-left:{{ indent }}rem;"{% endif %}>
+        <a href="{{ cat | category_link }}" class=cat-list-link>{{ cat.name }}</a>
+        <span class=cat-list-count>{{ cat.post_count }}</span>
+      {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+

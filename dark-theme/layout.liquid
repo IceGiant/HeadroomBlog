@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang=en>
+
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width">
+  <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/cyborg/bootstrap.min.css crossorigin=anonymous>
+  <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css crossorigin=anonymous>
+  <link rel=stylesheet href="{{ "style.css" | theme_asset }}">
+</head>
+
+  <title>{{ page_title | strip_html }}{% if page_title %} &laquo; {% endif %}{{ web_log.name | strip_html }}</title>
+  {% page_head -%}
+  <header>
+    <nav class="navbar navbar bg-dark navbar-expand-md justify-content-start px-2" data-bs-theme="dark">
+      <div class=container-fluid>
+        <a class=navbar-brand href="{{ "" | relative_link }}">{{ web_log.name }}</a>
+        <button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarText
+                aria-controls=navbarText aria-expanded=false aria-label="Toggle navigation">
+          <span class=navbar-toggler-icon></span>
+        </button>
+        <div class="collapse navbar-collapse" id=navbarText>
+          {% if web_log.subtitle -%}
+            <span class=navbar-text>{{ web_log.subtitle.value }}</span>
+          {%- endif %}
+          <ul class=navbar-nav>
+          {% unless web_log.default_page == "posts" %}{{ "page/1" | nav_link: "Posts" }}{% endunless %}
+          {% if page_list -%}
+            {% for pg in page_list %}{{ pg.permalink | nav_link: pg.title }}{% endfor %}
+          {%- endif %}
+          </ul>
+          {% user_links %}
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>{{ content }}</main>
+
+  <footer>
+    <hr>
+    <div class="container-fluid">
+      <small>
+        This site operates Value 4 Value so you're not turned into a product by advertisers. Received something of value? Tell me what you valued and <a href="https://mattthetall.site/link-tree"> donate </a> 
+      </small>
+      <small id="copyright">
+      </small>
+    </div>
+  </footer>
+  <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js crossorigin=anonymous></script>
+
+<script>
+  let year = new Date().getFullYear();
+  let copyright = document.getElementById("copyright");
+  copyright.textContent = `Copyright © ${year.toString()} Matthew Olmsted`;
+
+  document.querySelector("[href='/user/log-on']").remove();
+</script>
+</html>

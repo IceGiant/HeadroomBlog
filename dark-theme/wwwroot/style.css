@@ -1,0 +1,214 @@
+
+:root {
+  --text-color: #adafae;
+  --accent-color: #2a9fd6;
+  --bkg-color: rgb(68, 68, 68);
+  --item-bkg-color: hsl(0, 0%, 12%);
+  --overlay-bgk-color: rgba(255, 255, 255, .2);
+  --hdr-bkg-color: hsl(0, 0%, 7%);
+}
+
+.item-meta {
+  font-size: 1.1rem;
+  font-weight: normal;
+}
+.item-meta::before {
+  content: "»";
+  vertical-align: text-top;
+}
+a:link, a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 3rem; 
+}
+h1 a:link, h1 a:visited {
+  color: var(--accent-color);
+}
+h2 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 1.7rem;
+}
+h5 {
+  font-size: 1.5rem;
+}
+h6 {
+  font-size: 1.2rem;
+}
+
+
+body .title {
+  text-align: center;
+  padding-top: 20px;
+}
+body .post-details {
+  text-align: center;
+}
+
+body img {
+  max-width: 100%;
+}
+
+p > img {
+  /* Images in articles that don't have embedded hyperlinks */
+  padding: 0% 10%;
+}
+
+blockquote {
+  margin: 1rem 2rem 1rem 1rem;
+  border-left: solid 3px var(--accent-color);
+  padding-left: 1rem;
+}
+
+sup, sub {
+  font-size: smaller;
+}
+sup {
+  vertical-align: text-top;
+}
+sub {
+  vertical-align: baseline;
+}
+
+
+
+/* ----- CONTENT STYLES ----- */
+.index-title {
+  border-bottom: solid 2px var(--accent-color);
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  max-width: 60rem;
+  margin: 0 auto auto;
+  padding: 0 .4rem;
+}
+.article-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.item {
+  border: solid 1px black;
+  border-radius: .5rem;
+  background-color: var(--item-bkg-color);
+  padding: .4rem;
+  margin-bottom: 1.2rem;
+}
+.item-heading {
+  margin: -.4rem -.4rem .4rem;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+  border-bottom: solid 1px darkgray;
+  padding-bottom: .2rem;
+  text-align: center;
+  color: var(--accent-color);
+  background-color: var(--hdr-bkg-color);
+}
+.post-meta {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+.pager {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 0;
+}
+.pager li {
+  list-style-type: none;
+  display: inline-block;
+}
+
+
+
+/* ----- Sidebar and Category Styles ----- */
+
+.sidebar {
+  margin-top: 1rem;
+  width: 15rem;
+  font-size: 1rem;
+}
+
+.sidebar.mobile {
+  width: 100%;
+  padding: 0% 15%;
+}
+
+.item.categories.mobile {
+  width: 100%;
+  flex-direction: column;
+}
+
+.cat-list {
+  padding: .6rem;
+  margin: 0px;
+}
+.cat-list ul {
+  padding-left: 1rem;
+}
+.cat-list li {
+  list-style-type: none;
+  padding-bottom: .25rem;
+}
+.cat-list ul li ul > li {
+  padding-top: .2rem;
+}
+.cat-list-count {
+  font-size: .8rem;
+  padding-left: .4rem;
+}
+.cat-list-count:before {
+  content: '(';
+}
+.cat-list-count:after {
+  content: ')';
+}
+.categories {
+  min-width: 150px;
+  height:fit-content;
+}
+
+.categories .item-heading {
+  padding: .3rem;
+}
+
+/* ----- Images with hyperlinks for music ----- */
+
+.music-tiles {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  div {
+    margin: 1.6%;
+    width: 30%;
+    height: 30%;
+  }
+}
+
+
+/* ----- Footer Styles ----- */
+
+footer .container-fluid {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+
+  small {
+    text-align: center;
+    padding-bottom: 10px;
+  }
+}
